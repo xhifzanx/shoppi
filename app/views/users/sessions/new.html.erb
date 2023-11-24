@@ -1,0 +1,36 @@
+
+<div class="text-center mb-3">
+  <a href="index.html"><img src="/assets/logo-full.png" alt=""></a>
+</div>
+<h4 class="text-center mb-4 text-white">Sign in your account</h4>
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="form-group">
+        <label class="mb-1 text-white"><strong>Email</strong></label>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control" %>
+    </div>
+    <div class="form-group">
+        <label class="mb-1 text-white"><strong>Password</strong></label>
+        <%= f.password_field :password, autocomplete: "current-password", class:"form-control" %>
+    </div>
+    <div class="form-row d-flex justify-content-between mt-4 mb-2">
+              <% if devise_mapping.rememberable? %>
+                <div class="field">
+                  <div class="form-group">
+                    <div class="custom-control custom-checkbox ms-1 text-white">
+                      <%= f.check_box :remember_me ,class:"form-check-input", id:"basic_checkbox_1" %>
+                      <%= f.label :remember_me, class:"custom-control-label", for:"basic_checkbox_1" %>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+        <div class="form-group">
+            <a class="text-white" href="page-forgot-password.html">Forgot Password?</a>
+        </div>
+    </div>
+    <div class="text-center">
+        <%= f.submit "Log in", class:"btn bg-white text-primary btn-block" %>
+    </div>
+<% end %>
+<div class="new-account mt-3">
+  <%= render "users/shared/links" %>
+</div>

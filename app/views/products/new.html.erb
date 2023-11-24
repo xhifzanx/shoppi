@@ -1,0 +1,108 @@
+<div class="content-body">
+    <div class="container-fluid">
+        <div class="page-titles">
+            <h4>Element</h4>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Form</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Element</a></li>
+            </ol>
+        </div>
+        <!-- row -->
+        <div class="row">
+            <div class="col-xl-6 col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Product Form</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="basic-form">
+                          <div>
+                            <%= form_for @product, local: true, html: {multipart: true, id: 'product_form'} do |f| %>
+                                <div class="dropzone" id="upload-form"></div><br/>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Name</label>
+                                    <div class="col-sm-9">
+                                        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+                                        <%= f.text_field :name, class: 'form-control', placeholder: 'Product Name' %>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Price</label>
+                                    <div class="col-sm-9">
+                                        <%= f.number_field :price, class: 'form-control', placeholder: 'Price' %>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Description</label>
+                                    <div class="col-sm-9">
+                                        <%= f.text_area :description, class: 'form-control', placeholder: 'Description' %>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Image</label>
+                                    <div class="col-sm-9">
+                                        <%= f.file_field :images, multiple: true %>
+                                    </div>
+                                    
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-10">
+                                        <%= f.submit 'Submit', class: 'btn btn-primary' %>
+                                    </div>
+                                </div>
+                            <%end%>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+  Dropzone.options.uploadForm = { // The camelized version of the ID of the form element
+
+    // The configuration we've talked about above
+    autoProcessQueue: false,
+    url: '/products',
+    paramName: 'product[images][]',
+    uploadMultiple: true,
+    parallelUploads: 100,
+    maxFiles: 100,
+
+    // The setting up of the dropzone
+    init: function() {
+      var myDropzone = this;
+      // First change the button to actually tell Dropzone to process the queue.
+      $('#product_form').on("submit", function(e) {
+        // Make sure that the form isn't actually being sent.
+        e.preventDefault();
+        e.stopPropagation();
+
+        myDropzone.processQueue();
+      });
+
+      // Listen to the sendingmultiple event. In this case, it's the sendingmultiple event instead
+      // of the sending event because uploadMultiple is set to true.
+      this.on("sendingmultiple", function() {
+        // Gets triggered when the form is actually being sent.
+        // Hide the success button or the complete form.
+      });
+      this.on("successmultiple", function(files, response) {
+        // Gets triggered when the files have successfully been sent.
+        // Redirect user or notify of success.
+      });
+      this.on("errormultiple", function(files, response) {
+        // Gets triggered when there was an error sending the files.
+        // Maybe show form again, and notify user of error
+      });
+    }
+   
+  }
+
+
+
+</script>
