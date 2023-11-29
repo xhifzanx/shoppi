@@ -1,0 +1,22 @@
+version: '3'
+services:
+  db:
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+    ports:
+      - "3308:3306"
+    volumes:
+      - "dbdata:/var/lib/mysql"
+  web:
+    build: .
+    ports: 
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: mysql2://${DB_USERNAME}:${DB_PASSWORD}@db:3306/${DB_NAME}
+    volumes:
+      - .:/app
+volumes:
+  dbdata:
