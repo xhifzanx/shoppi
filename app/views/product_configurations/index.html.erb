@@ -1,0 +1,32 @@
+<div class="content-body">
+  <div class="container-fluid">
+    <div class="page-titles">
+			<h4>Product Configuration</h4>
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="javascript:void(0)">Form</a></li>
+				<li class="breadcrumb-item active"><a href="javascript:void(0)">Configurations</a></li>
+			</ol>
+    </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title">Generate Category</h4>
+            </div>
+            <div class="card-body">
+              <div class="basic-form">
+                <%= form_for :category, url: generate_category_product_configurations_path, method: :post do |f|%>
+                  <div class="form-group">
+                    <%= f.text_field :name, class: 'form-control input-default', placeholder: 'Category Name'%>
+                  </div>
+                  <div class="form-group">
+                    <%= f.submit 'Submit', class: 'btn btn-primary' %>
+                  </div>
+                <%end%>
+              </div>
+            </div>
+          </div>
+			</div>
+		</div>
+  </div>
+</div>
