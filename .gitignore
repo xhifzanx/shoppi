@@ -38,3 +38,13 @@
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+# Ignore docker compose environment files
+.env
+
+
+
+# Ignore data
+/.data
+
+# Ignore test files
+/spec/examples.txt
